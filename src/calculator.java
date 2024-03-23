@@ -11,22 +11,34 @@ public class calculator{
         course[3] = "SE";
         DecimalFormat df = new DecimalFormat("#.##");
         double grade = 0;
-        for (int i = 0; i < 4; i++) {
-            System.out.println(course[i]);
-           double T_T = helper.dis(i);
-            grade += T_T;
-            r[i] = (course[i]+":"+df.format(T_T)+"%");
-        }
-        for(int j = 0; j < 4; j++){
-            System.out.println(r[j]);
-        }
-        grade /= 4;
-        System.out.println("Overall Attendance is : "+ df.format(grade) + "%");
-        if (grade < 75){
-            System.out.println("You should sit more classes");
-        }
-        else {
-            System.out.println("Yo! You're all Good!");
+        boolean y = true;
+        for (int x = 0; x < 4; x++){
+            while (x < 4 && y ){
+                for (int i = 0; i < 4; i++) {
+                    System.out.println(course[i]);
+                    double T_T = helper.dis(i);
+                    if (T_T == 0.0){
+                        y = false;
+                        break;
+                    }
+                    else{
+                        grade += T_T;
+                        r[i] = (course[i]+":"+df.format(T_T)+"%");
+                    }
+                    for(int j = 0; j < 4; j++){
+                        System.out.println(r[j]);
+                    }
+                    grade /= 4;
+                    System.out.println("Overall Attendance is : "+ df.format(grade) + "%");
+                    if (grade < 75){
+                        System.out.println("You should sit more classes");
+                    }
+                    else {
+                        System.out.println("Yo! You're all Good!");
+                    }
+                }
+
+            }
         }
     }
 }
