@@ -25,7 +25,7 @@ public class calculator{
         }
 
 
-        for(int j = 0; j < no_of_course; j++){
+        for(int j = 0; j < no_of_course; j++){  // Taking Classes Inputs
             System.out.println(course[j]);
             System.out.print("Initial classes: ");
             no_of_classes[j] = in.nextInt();
@@ -33,20 +33,26 @@ public class calculator{
             total_class[j] = in.nextInt();
         }
 
-        for(int k = 0; k < no_of_course; k++){
-            percentage_of_course[k] = (float) no_of_classes[k] /total_class[k];
-            percentage_of_course[k] *= 100;
-            System.out.println(course[k]+": "+df.format(percentage_of_course[k])+" %");
-            should_attend_or_not[k] = (percentage_criteria * total_class[k] - 100 * no_of_classes[k])/(100 - percentage_criteria);
-        }
-        for(int l = 0; l < no_of_course; l++){
-            if(should_attend_or_not[l] > 0){
-                System.out.println("You should attend next " + should_attend_or_not[l]+ " classes of "+ course[l] +" to get on back on track");
+        for (int n = 0; n < no_of_course; n++){
+            if ( no_of_classes[n] <= total_class[n]){
+                for(int k = 0; k < no_of_course; k++){
+                    percentage_of_course[k] = (float) no_of_classes[k] /total_class[k];
+                    percentage_of_course[k] *= 100;
+                    System.out.println(course[k]+": "+df.format(percentage_of_course[k])+" %");
+                    should_attend_or_not[k] = (percentage_criteria * total_class[k] - 100 * no_of_classes[k])/(100 - percentage_criteria);
+                }
+                for(int l = 0; l < no_of_course; l++){
+                    if(should_attend_or_not[l] > 0){
+                        System.out.println("You should attend next " + should_attend_or_not[l]+ " classes of "+ course[l] +" to get on back on track");
+                    }
+                    else {
+                        System.out.println("You can bunk next " + ((100 * no_of_classes[l] - percentage_criteria * total_class[l])/percentage_criteria) + " classes of "+ course[l] );
+                    }
+                }
             }
-            else {
-                System.out.println("You can bunk next " + ((100 * no_of_classes[l] - percentage_criteria * total_class[l])/percentage_criteria) + " classes of "+ course[l] );
+            else{
+                throw new IllegalArgumentException(" No.of Initial classes can not be greater than Total No. of classes");
             }
         }
-
     }
 }
